@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/primary"
+        android:id="@+id/linSpinnerWrapper">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+
+            android:id="@+id/spinFacilitySelection"/>
+
+        <!-- TODO: Put back later
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgCalendar"
+            android:visibility="gone"
+            android:src="@drawable/ic_today_white_36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="12dp"/>-->
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:id="@+id/relSelectDate"
+        android:background="@color/primary"
+        android:layout_below="@+id/linSpinnerWrapper">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_keyboard_arrow_left_white_36dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/imgPrevDay"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:id="@+id/tvDate"
+            android:textSize="@dimen/date_sz"
+            android:clickable="true"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_keyboard_arrow_right_white_36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/imgNextDay"
+            android:clickable="true"/>
+    </RelativeLayout>
+
+
+    <!-- Chart to view attendence -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relSelectDate"
+        android:background="@null"
+
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/attendence_bars_margin"
+        android:layout_above="@+id/layout_bottom"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No Data Available"
+        android:id="@+id/tvNoData"
+        android:visibility="gone"/>
+
+    <!-- layout to display the open and close times -->
+    <include layout="@layout/activity_attendence_bottom"
+        android:id="@+id/layout_bottom"
+        ></include>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Bar aboce app to display location and occupancy rating -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/location_bar_height"
+        android:layout_margin="@dimen/attendence_bars_margin"
+        android:gravity="top">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/tv_percentFull"
+            android:textSize="@dimen/percent_full_size"
+            android:text="@string/mock_percent"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:textColor="@color/carolinaBlue2" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/attendence_bars_margin"
+            android:layout_toRightOf="@id/tv_percentFull"
+            android:layout_toEndOf="@+id/tv_percentFull">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_percentSymbol"
+                android:layout_marginTop="8dp"
+                android:text="@string/percent_symbol"
+                android:textSize="@dimen/percent_symbol_size"
+                android:textColor="@color/carolinaBlue3" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/tv_occupancyStatus"
+                android:textSize="@dimen/occupancy_status_size"
+                android:text="@string/mock_occupancy_status"
+                android:textColor="@color/carolinaBlue3" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_attendenceLocation"
+            android:layout_margin="@dimen/attendence_bars_margin"
+            android:textSize="@dimen/location_size"
+            android:text="@string/mock_attendence_location"
+            android:gravity="center"
+            android:textColor="@color/carolinaBlue3" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

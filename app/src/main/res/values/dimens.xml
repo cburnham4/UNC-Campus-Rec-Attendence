@@ -1,0 +1,40 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- MainActivity -->
+    <dimen name="date_sz">18sp</dimen>
+
+    <!-- Facility Time Cardview -->
+    <dimen name="facility_name_sz">18sp</dimen>
+    <dimen name="facility_name_padding">3dp</dimen>
+    <dimen name="facility_times_padding">3dp</dimen>
+
+    <!-- Attendence Activity -->
+    <dimen name="top_bar_margin">4dp</dimen>
+    <dimen name="top_bar_height">56dp</dimen>
+    <dimen name="location_bar_height">72dp</dimen>
+    <dimen name="bottom_bar_height">122dp</dimen>
+    <!-- adview height plus open close height -->
+    <dimen name="open_close_bar_height">72dp</dimen>
+    <dimen name="top_times_bar_height">72dp</dimen>
+    <dimen name="attendence_bars_margin">4dp</dimen>
+    <dimen name="location_arrows_height_width">32dp</dimen>
+    <!-- Attendence Text Sizes-->
+    <dimen name="rating_text_size">20sp</dimen>
+    <dimen name="day_text_size">24sp</dimen>
+    <dimen name="date_text_size">16sp</dimen>
+    <dimen name="date_arrow_size">34sp</dimen>
+    <dimen name="open_close_time_size">24sp</dimen>
+    <dimen name="open_close_label_size">16sp</dimen>
+    <dimen name="major_minor_label_size">14sp</dimen>
+    <dimen name="major_minor_time_size">12sp</dimen>
+    <dimen name="percent_full_size">64sp</dimen>
+    <dimen name="percent_symbol_size">20sp</dimen>
+    <dimen name="occupancy_status_size">20sp</dimen>
+    <dimen name="location_size">20sp</dimen>
+
+    <!-- Ad Layout -->
+    <dimen name="ad_layout_height">48dp</dimen>
+</resources>

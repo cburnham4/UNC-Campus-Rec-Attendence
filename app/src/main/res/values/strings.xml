@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Campus Rec Attendance</string>
+
+    <string name="open_colon">OPEN:</string>
+    <string name="close_colon">CLOSE:</string>
+    <string name="percent_symbol">%</string>
+
+    <!-- Formatting -->
+    <string name="date_format">yyyy-MM-dd</string>
+
+    <!-- Settings Activity -->
+    <string name="tag_facility_name">TAG_NAME</string>
+    <string name="tag_tv_name">TAG_TV_NAME</string>
+    <string name="select_facilities">Select Facilities</string>
+
+    <!-- User Preferences -->
+    <string name="user_preferences">USER_PREFERENCES</string>
+    <string name="user_pref_list_facilities">USER_PREF_FACILITIES</string>
+
+    <!-- Attendence Activity -->
+    <string name="occupancy_rating">OCCUPANCY \nSTATUS</string>
+    <string name="click_previous_day">&lt;</string>
+    <string name="click_next_day">&gt;</string>
+    <string name="open">OPEN</string>
+    <string name="close">CLOSE</string>
+    <string name="major_time">MAJOR\nTIME</string>
+    <string name="minor_time">MINOR\nTIME</string>
+
+    <!--Mock Attendence Activity -->
+    <string name="mock_day">Monday</string>
+    <string name="mock_date">March 02, 2016</string>
+    <string name="mock_percent">55</string>
+    <string name="mock_open_time">06:00 AM</string>
+    <string name="mock_close_time">10:30 PM</string>
+    <string name="mock_major_time1">09:30 AM - 12:40 PM</string>
+    <string name="mock_major_time2">04:30 PM - 05:40 PM</string>
+    <string name="mock_major_time3">08:30 PM - 10:00 PM</string>
+    <string name="mock_minor_time1">05:00 AM - 07:00 AM</string>
+    <string name="mock_minor_time2">07:00 PM - 09:00 PM</string>
+    <string name="mock_occupancy_status">AVERAGE</string>
+    <string name="mock_attendence_location">Rams Rec Center</string>
+    <string name="title_activity_equipment_signup">EquipmentSignupActivity</string>
+    <string name="title_activity_schedule">ScheduleActivity</string>
+    <string name="title_activity_choose_machine">ChooseMachine</string>
+
+</resources>
