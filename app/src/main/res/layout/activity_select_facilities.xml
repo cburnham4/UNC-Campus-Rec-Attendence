@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".activities.FacilitySettingsActivities">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +12,7 @@
 
         <include layout="@layout/toolbar"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFacilitySelections"
             android:layout_width="match_parent"
             android:layout_marginLeft="5dp"

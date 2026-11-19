@@ -4,28 +4,24 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +36,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import letshangllc.uncrecattendence.EdgeToEdgeHelper;
 import letshangllc.uncrecattendence.R;
 import letshangllc.uncrecattendence.adapter.FacilityTimesAdapter;
 import letshangllc.uncrecattendence.objects.FacilityTime;
@@ -68,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EdgeToEdgeHelper.applyToContentRoot(this);
 
         this.setupToolbar();
         this.findViews();
@@ -76,46 +74,36 @@ public class MainActivity extends AppCompatActivity {
         this.makeInitialHTTPRequest();
     }
 
-    private void setupToolbar(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    private void setupToolbar() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    private void findViews(){
-        tvDate = (TextView) findViewById(R.id.tvDate);
-        ImageView imgNextDay = (ImageView) findViewById(R.id.imgNextDay);
-        ImageView imgPrevDay = (ImageView) findViewById(R.id.imgPrevDay);
+    private void findViews() {
+        tvDate = findViewById(R.id.tvDate);
+        ImageView imgNextDay = findViewById(R.id.imgNextDay);
+        ImageView imgPrevDay = findViewById(R.id.imgPrevDay);
 
         tvDate.setText(getFormattedDate());
 
-        imgNextDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar.add(Calendar.DAY_OF_YEAR, 1);
-                updateData();
-            }
+        imgNextDay.setOnClickListener(view -> {
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            updateData();
         });
 
-        imgPrevDay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                calendar.add(Calendar.DAY_OF_YEAR, -1);
-                updateData();
-            }
+        imgPrevDay.setOnClickListener(view -> {
+            calendar.add(Calendar.DAY_OF_YEAR, -1);
+            updateData();
         });
 
-        tvDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDatePicker();
-            }
-        });
+        tvDate.setOnClickListener(view -> showDatePicker());
     }
 
-    private void getCurrentSelections(){
+    private void getCurrentSelections() {
         prefs = getSharedPreferences(getString(R.string.user_preferences), 0);
-        setOfSelectedFacilities = new HashSet<String>(prefs.getStringSet(getString(R.string.user_pref_list_facilities), new HashSet<String>()));
-        if(setOfSelectedFacilities.size() == 0){
+        setOfSelectedFacilities = new HashSet<>(prefs.getStringSet(
+                getString(R.string.user_pref_list_facilities), new HashSet<>()));
+        if (setOfSelectedFacilities.size() == 0) {
             Toast.makeText(this, "Select Facilities to Track", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(MainActivity.this, FacilitySettingsActivities.class);
             startActivity(intent);
@@ -126,12 +114,9 @@ public class MainActivity extends AppCompatActivity {
         facilityTimes = new ArrayList<>();
         facilityTimesAdapter = new FacilityTimesAdapter(facilityTimes, this);
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvFacilityTimes);
-
+        final RecyclerView recyclerView = findViewById(R.id.rvFacilityTimes);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-
-
         recyclerView.setAdapter(facilityTimesAdapter);
     }
 
@@ -141,33 +126,27 @@ public class MainActivity extends AppCompatActivity {
 
         String currentDate = getCurrentDate();
 
-        // Instantiate the RequestQueue.
         queue = Volley.newRequestQueue(this);
-        String url = "https://www.googleapis.com/calendar/v3/calendars/0tsujpkp3toi9u3orsq3bapl04@" +
-                "group.calendar.google.com/events?key=AIzaSyDb5Wf60m9_IOGjP3HSQsSjmBJN_Lg4FJc&sing" +
-                "leEvents=true&timeMax="+currentDate+"T23:59:59-04:00&timeMin="+currentDate+"T00:00:00-04:00";
+        String calendarId = Uri.encode(getString(R.string.google_calendar_id));
+        String apiKey = Uri.encode(getString(R.string.google_calendar_api_key));
+        String url = "https://www.googleapis.com/calendar/v3/calendars/" + calendarId
+                + "/events?key=" + apiKey
+                + "&singleEvents=true&timeMax=" + currentDate + "T23:59:59-04:00"
+                + "&timeMin=" + currentDate + "T00:00:00-04:00";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.i(TAG, response.toString());
-                        parseResponse(response);
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e(TAG, error.toString());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET, url, null,
+                response -> {
+                    Log.i(TAG, response.toString());
+                    parseResponse(response);
+                },
+                error -> Log.e(TAG, error.toString())
+        );
 
-                    }
-                });
-
-        // Add the request to the RequestQueue.
         queue.add(jsonObjectRequest);
     }
 
     private void parseResponse(JSONObject jsonObject) {
-        /* Clear the previous data */
         facilityTimes.clear();
         try {
             JSONArray jsonArray = jsonObject.getJSONArray("items");
@@ -175,8 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                 String facilityName = jsonObject1.getString("summary");
 
-                /* Only display the facilities that are selected */
-                if(setOfSelectedFacilities.contains(facilityName)){
+                if (setOfSelectedFacilities.contains(facilityName)) {
                     JSONObject startObject = jsonObject1.getJSONObject("start");
                     JSONObject endObject = jsonObject1.getJSONObject("end");
                     String start = startObject.getString("dateTime");
@@ -188,43 +166,35 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         facilityTimesAdapter.notifyDataSetChanged();
-
     }
 
-    private String getFormattedDate(){
-        DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy");
+    private String getFormattedDate() {
+        DateFormat dateFormat = new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault());
         Date date = calendar.getTime();
         return dateFormat.format(date);
     }
 
-    private String getCurrentDate(){
+    private String getCurrentDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(getString(R.string.date_format), Locale.US);
         Date date = calendar.getTime();
         return dateFormat.format(date);
     }
 
-    private void updateData(){
+    private void updateData() {
         makeInitialHTTPRequest();
         tvDate.setText(getFormattedDate());
     }
 
-    private void showDatePicker(){
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, monthOfYear);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateData();
-            }
-
+    private void showDatePicker() {
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            updateData();
         };
 
         new DatePickerDialog(this, date, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)).show();
-
     }
 
     @Override
@@ -233,23 +203,21 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main_toolbar, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.calendar:
-                //showDatePicker();
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://campusrec.unc.edu/wp-content/uploads/2015/08/Summer-Break-Schedule-2016-2.pdf"));
-                startActivity(browserIntent);
-                return true;
-
-            case R.id.settings:
-                Intent intent = new Intent(MainActivity.this, FacilitySettingsActivities.class);
-                startActivity(intent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == R.id.calendar) {
+            // Prefer HTTPS; original 2016 PDF path is stale — open current Campus Rec hours page.
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://campusrec.unc.edu/facilities/hours/"));
+            startActivity(browserIntent);
+            return true;
+        } else if (itemId == R.id.settings) {
+            Intent intent = new Intent(MainActivity.this, FacilitySettingsActivities.class);
+            startActivity(intent);
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
-
 }

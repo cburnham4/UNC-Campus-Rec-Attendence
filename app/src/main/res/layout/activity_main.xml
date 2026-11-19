@@ -19,9 +19,10 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_keyboard_arrow_left_white_36dp"
             android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
             android:id="@+id/imgPrevDay"
-            android:clickable="true"/>
+            android:contentDescription="@string/click_previous_day"
+            android:clickable="true"
+            android:focusable="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +32,7 @@
             android:id="@+id/tvDate"
             android:textSize="@dimen/date_sz"
             android:clickable="true"
+            android:focusable="true"
             />
 
         <ImageView
@@ -38,12 +40,13 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_keyboard_arrow_right_white_36dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:id="@+id/imgNextDay"
-            android:clickable="true"/>
+            android:contentDescription="@string/click_next_day"
+            android:clickable="true"
+            android:focusable="true"/>
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFacilityTimes"
         android:layout_width="match_parent"
         android:layout_marginLeft="5dp"

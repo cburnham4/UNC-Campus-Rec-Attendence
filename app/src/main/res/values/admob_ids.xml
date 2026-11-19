@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PRODUCTION AdMob IDs for Recreation Attendence for UNC
+    Package: letshangllc.uncrecattendence
+    Publisher: ca-app-pub-8223005482588566
+
+    Source: AdMob console export (CSV). Debug builds override with Google test IDs
+    via app/src/debug/res/values/admob_ids.xml.
+
+    Mapping:
+    ========
+    Screen / slot              | AdMob unit name         | Resource
+    AttendenceActivity banner  | Banner Ad Attendence    | admob_banner_attendence
+-->
+<resources>
+    <string name="admob_app_id">ca-app-pub-8223005482588566~6057271933</string>
+    <string name="admob_banner_attendence">ca-app-pub-8223005482588566/9010738334</string>
+</resources>
