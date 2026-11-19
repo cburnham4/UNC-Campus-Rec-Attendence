@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    DEBUG BUILD: Google's official test AdMob IDs.
+    Release IDs (with TODOs for real units) live in app/src/main/res/values/admob_ids.xml.
+-->
+<resources>
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_banner_attendence">ca-app-pub-3940256099942544/6300978111</string>
+</resources>

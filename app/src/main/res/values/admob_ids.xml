@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PRODUCTION AdMob IDs for Recreation Attendence for UNC
+    Publisher: ca-app-pub-8223005482588566
+
+    Real banner unit IDs were not present in this repo (likely gitignored historically).
+    Replace the TODO placeholders below with AdMob unit IDs from the AdMob console
+    before shipping a release build. Debug builds use Google's official test IDs via
+    app/src/debug/res/values/admob_ids.xml.
+-->
+<resources>
+    <!-- AdMob Application ID: publisher prefix is known; ~APP_ID suffix is a TODO -->
+    <!-- TODO(release): replace with real AdMob app ID, e.g. ca-app-pub-8223005482588566~XXXXXXXXXX -->
+    <string name="admob_app_id">ca-app-pub-8223005482588566~TODO_REPLACE_APP_ID</string>
+
+    <!-- TODO(release): replace with real banner unit ID for AttendenceActivity -->
+    <string name="admob_banner_attendence">ca-app-pub-8223005482588566/TODO_REPLACE_BANNER_ID</string>
+</resources>

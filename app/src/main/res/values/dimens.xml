@@ -35,6 +35,6 @@
     <dimen name="occupancy_status_size">20sp</dimen>
     <dimen name="location_size">20sp</dimen>
 
-    <!-- Ad Layout -->
-    <dimen name="ad_layout_height">48dp</dimen>
+    <!-- Ad Layout (adaptive banners size themselves; keep a min height for layout) -->
+    <dimen name="ad_layout_height">50dp</dimen>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Google Calendar API config used for UNC facility hours.
+
+    This key was previously hardcoded in Java sources and is already in git history.
+    Restrict/rotate it in Google Cloud Console (HTTP referrer / Android app restrictions)
+    and prefer storing production secrets outside the repo long-term.
+-->
+<resources>
+    <string name="google_calendar_id" translatable="false">0tsujpkp3toi9u3orsq3bapl04@group.calendar.google.com</string>
+    <string name="google_calendar_api_key" translatable="false">AIzaSyDb5Wf60m9_IOGjP3HSQsSjmBJN_Lg4FJc</string>
+</resources>
